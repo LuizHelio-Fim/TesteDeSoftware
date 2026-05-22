@@ -10,11 +10,27 @@ public class Tradutor {
 	}
 
 	public void adicionaTraducao(String palavra, String traducao) {
-		this.dicionario.put(palavra, traducao);
+		if (dicionario.containsKey(palavra)) {
+			traducao = traduzir(palavra) + ", " + traducao;
+		}
+		dicionario.put(palavra, traducao);
 	}
 
 	public String traduzir(String palavra) {
 		return dicionario.get(palavra);
+	}
+	
+	public String traduzirFrase(String frase) {
+		String[] palavras = frase.split(" "); 
+		String traducao;
+		String phrase = "";
+		
+		for(String palavra : palavras) {
+			traducao = traduzir(palavra);
+			phrase += traducao + " ";
+		}
+		
+		return phrase.trim();
 	}
 
 }

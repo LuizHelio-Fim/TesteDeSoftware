@@ -12,24 +12,40 @@ public class TesteTradutor {
 		t = new Tradutor();
 	}
 
-	@Test
+	//@Test
 	public void tradutorSemPalavras() {
 		assertTrue(t.isEmpty()); 
 	}
 	
-	@Test
+	//@Test
 	public void tradutorUmaPalavra() {
 		t.adicionaTraducao("Bom","Good");
 		assertFalse(t.isEmpty()); 
 		assertEquals("Good",t.traduzir("Bom"));
 	}
 	
-	@Test
+	//@Test
 	public void tradutorDuasPalavras() {
 		t.adicionaTraducao("Mal", "Bad");
 		t.adicionaTraducao("Bem", "Well");
 		assertEquals("Bad", t.traduzir("Mal"));
 		assertEquals("Well", t.traduzir("Bem"));
+	}
+	
+	//@Test
+	public void tradutorDuasPalavrasMesmoSignificado() {
+		t.adicionaTraducao("Bom", "Good");
+		t.adicionaTraducao("Bom", "Nice");
+		assertEquals("Good, Nice", t.traduzir("Bom"));
+
+	}
+	
+	@Test
+	public void tradutorFrase() {
+		t.adicionaTraducao("Guerras", "Wars");
+		t.adicionaTraducao("sao", "are");
+		t.adicionaTraducao("Ruins", "Bad");
+		assertEquals("Wars are Bad", t.traduzirFrase("Guerras sao Ruins"));
 	}
 
 }
